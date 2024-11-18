@@ -8,9 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#1a1b1d",
+        gridBg: "#1c1d1f",
+        textDark: "#6b737e",
+        textWhite: "#D2D5DA",
       },
+    },
+    fontFamily: {
+      beVietnamPro: ["Be Vietnam Pro", "sans-serif"],
     },
   },
   plugins: [],

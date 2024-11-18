@@ -1,0 +1,30 @@
+[
+  {
+    "name": {
+      "common": "South Georgia"
+    },
+    "independent": false,
+    "unMember": false,
+    "region": "Antarctic",
+    "area": 3903,
+    "population": 30,
+    "continents": ["Antarctica"],
+    "flags": {
+      "svg": "https://flagcdn.com/gs.svg"
+    }
+  },
+  {
+    "name": {
+      "common": "Grenada"
+    },
+    "independent": true,
+    "unMember": true,
+    "region": "Americas",
+    "area": 344,
+    "population": 112519,
+    "continents": ["North America"],
+    "flags": {
+      "svg": "https://flagcdn.com/gd.svg"
+    }
+  }
+]
