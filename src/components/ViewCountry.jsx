@@ -40,7 +40,12 @@ export default function ViewCountry({ country, setViewCountry }) {
           lat,
           lon
         );
-        return { name: country.name, flag: country.flags.svg, distance };
+        return {
+          name: country.name,
+          flag: country.flags.svg,
+          distance,
+          country,
+        };
       });
 
     distances.sort((a, b) => a.distance - b.distance);
@@ -155,8 +160,11 @@ export default function ViewCountry({ country, setViewCountry }) {
             closestCountries.length > 0 &&
             closestCountries.map((country, index) => (
               <div
-                className="h-40 flex flex-col items-center mr-5 mt-10"
+                className="h-40 flex flex-col items-center mr-5 mt-10 cursor-pointer"
                 key={index}
+                onClick={() => {
+                  setViewCountry(country.country);
+                }}
               >
                 <img
                   src={country.flag}
