@@ -11,8 +11,8 @@ export default function Document() {
           rel="stylesheet"
         />
         <link rel="icon" href="/favicon.png" />
-        <title>World Ranks</title>
       </Head>
+      <title>World Ranks</title>
       <body className="antialiased">
         <Main />
         <NextScript />

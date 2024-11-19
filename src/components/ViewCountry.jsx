@@ -4,6 +4,7 @@ import { useCountries } from "../context/useContext";
 export default function ViewCountry({ country, setViewCountry }) {
   const { countries } = useCountries();
   const [closestCountries, setClosestCountries] = useState([]);
+  const [skeleton, setSkeleton] = useState(true);
 
   // Calcular distancia usando la fórmula de Haversine
   function haversine(lat1, lon1, lat2, lon2) {
@@ -52,6 +53,10 @@ export default function ViewCountry({ country, setViewCountry }) {
 
   useEffect(() => {
     getClosestCountries();
+    setTimeout(() => {
+      console.log("Skeleton removed");
+      setSkeleton(false);
+    }, 3000);
   }, [country]);
 
   let languajes = Object.values(country.languajes).join(", ");
@@ -146,9 +151,13 @@ export default function ViewCountry({ country, setViewCountry }) {
           Neighbouring Countries
         </h1>
         <div className="w-full h-32 flex items-center justify-start">
-          {closestCountries.length > 0 ? (
+          {skeleton === false ? (
+            closestCountries.length > 0 &&
             closestCountries.map((country, index) => (
-              <div className="h-40 flex flex-col items-center mr-5" key={index}>
+              <div
+                className="h-40 flex flex-col items-center mr-5 mt-10"
+                key={index}
+              >
                 <img
                   src={country.flag}
                   alt={`Flag of ${country.name}`}
