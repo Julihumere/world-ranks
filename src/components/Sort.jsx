@@ -17,7 +17,7 @@ export default function Sort({
       <div className="relative inline-block w-64 max-[640px]:w-full">
         <button
           onClick={handleDropdown}
-          className={`w-full flex items-center justify-between bg-transparent border border-textDark ${
+          className={`w-full flex items-center justify-between font-beVietnamPro font-bold text-textWhite bg-transparent border border-textDark ${
             isOpen ? "rounded-t-lg" : "rounded-lg"
           }  px-4 py-3 text-sm shadow-sm text-left lg:w-[90%] md:w-[70%] sm:w-[50%] max-[640px]:w-full`}
           id="dropdown-button"
@@ -29,11 +29,11 @@ export default function Sort({
         </button>
         {isOpen && (
           <ul
-            className="absolute w-full bg-gridBg border border-textDark rounded-b-md shadow-lg lg:w-[90%] md:w-[70%] sm:w-[50%]"
+            className="absolute w-full  bg-gridBg border border-textDark rounded-b-md shadow-lg lg:w-[90%] md:w-[70%] sm:w-[50%]"
             id="dropdown-menu"
           >
             <li
-              className="px-4 py-2 hover:bg-gray-500 cursor-pointer"
+              className="px-4 py-2 text-textWhite font-beVietnamPro hover:bg-gray-500 cursor-pointer"
               value={"Population"}
               onClick={(e) => {
                 handleOption(e.target.innerText);
@@ -43,7 +43,7 @@ export default function Sort({
               Population
             </li>
             <li
-              className="px-4 py-2 hover:bg-gray-500 cursor-pointer"
+              className="px-4 py-2 text-textWhite font-beVietnamPro hover:bg-gray-500 cursor-pointer"
               value={"Area"}
               onClick={(e) => {
                 handleOption(e.target.innerText);
@@ -53,7 +53,7 @@ export default function Sort({
               Area
             </li>
             <li
-              className="px-4 py-2 hover:bg-gray-500 cursor-pointer"
+              className="px-4 py-2 text-textWhite font-beVietnamPro hover:bg-gray-500 cursor-pointer"
               value={"Alphabetical"}
               onClick={(e) => {
                 handleOption(e.target.innerText);

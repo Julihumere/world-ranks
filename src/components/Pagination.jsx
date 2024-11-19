@@ -19,9 +19,9 @@ export default function Pagination({
                 setActive(active - 1);
               }
             }}
-            className="px-3 py-1 bg-transparent border-2 border-textWhite rounded-lg"
+            className="px-3 py-1 bg-transparent border-2 text-textWhite font-beVietnamPro font-bold border-textWhite rounded-lg"
           >
-            Anterior
+            Prev
           </button>
         </li>
         <li>
@@ -29,7 +29,7 @@ export default function Pagination({
             onClick={() => {
               paginate(active);
             }}
-            className="px-3 py-1 bg-transparent border-2 border-textWhite rounded-lg"
+            className="px-3 py-1 bg-transparent border-2 text-textWhite font-beVietnamPro font-bold border-textWhite rounded-lg"
           >
             {active}
           </button>
@@ -42,9 +42,9 @@ export default function Pagination({
                 setActive(active + 1);
               }
             }}
-            className="px-3 py-1 bg-transparent border-2 border-textWhite rounded-lg"
+            className="px-3 py-1 bg-transparent border-2 text-textWhite font-beVietnamPro font-bold border-textWhite rounded-lg"
           >
-            Siguiente
+            Next
           </button>
         </li>
       </ul>
