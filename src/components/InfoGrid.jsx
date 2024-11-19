@@ -2,7 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Pagination from "./Pagination";
 
-export default function InfoGrid({ currentCountries }) {
+export default function InfoGrid({
+  currentCountries,
+  handleSelectCountry,
+  filterByWords,
+}) {
   return (
     <table className="w-full h-20 sm:ml-4 sm:w-[90%] md:w-[90%] max-[640px]:w-[90%]">
       <thead className="w-full">
@@ -26,7 +30,14 @@ export default function InfoGrid({ currentCountries }) {
       </thead>
       <tbody className="h-20">
         {currentCountries.map((country) => (
-          <tr key={country.alpha3Code} className="hover:bg-[#1e2124]">
+          <tr
+            key={country.id}
+            className="hover:bg-[#1e2124]"
+            onClick={() => {
+              filterByWords("");
+              handleSelectCountry(country);
+            }}
+          >
             <td className="w-16 px-2 sm:px-4 py-2">
               <img
                 src={country.flags?.svg}

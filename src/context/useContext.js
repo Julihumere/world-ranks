@@ -15,7 +15,15 @@ export const CountriesProvider = ({ children }) => {
     const data = await result.json();
 
     const countries = data.map((country) => ({
+      id: country.cca3,
       name: country.name?.common,
+      nameOfficial: country.name?.official,
+      capital: country.capital?.[0] ?? "No capital",
+      subregion: country.subregion ?? "No subregion",
+      languajes: country.languages,
+      currencies: country.currencies ?? "No currency",
+      lat: country.latlng?.[0] ?? 0,
+      lon: country.latlng?.[1] ?? 0,
       independent: country.independent ?? false,
       unMember: country.unMember ?? false,
       region: country.region,
@@ -81,6 +89,10 @@ export const CountriesProvider = ({ children }) => {
   };
 
   const filterByWords = (word) => {
+    if (word === "") {
+      setCountries(originalCountries);
+      return;
+    }
     const filteredCountries = originalCountries.filter((country) =>
       country.name.toLowerCase().includes(word.toLowerCase())
     );
