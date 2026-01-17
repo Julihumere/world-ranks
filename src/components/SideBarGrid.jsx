@@ -4,7 +4,7 @@ import SortButtons from "./SortButtons";
 import Status from "./Status";
 import { useCountries } from "../context/useContext";
 
-export default function SideBarGrid() {
+export default function SideBarGrid({ onFilterChange }) {
   const { sortRegions, sortMembers } = useCountries();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Population");
@@ -30,11 +30,13 @@ export default function SideBarGrid() {
     }
     setContinents(arrayContinents);
     sortRegions(arrayContinents);
+    if (onFilterChange) onFilterChange();
   };
 
   const handleStatus = (status) => {
     setStatusNations(status === statusNations ? "" : status);
     sortMembers(status === statusNations ? "" : status);
+    if (onFilterChange) onFilterChange();
   };
 
   return (

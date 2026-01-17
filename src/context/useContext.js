@@ -11,7 +11,9 @@ export const CountriesProvider = ({ children }) => {
   const [selectedContinents, setSelectedContinents] = useState([]);
 
   const getCountries = async () => {
-    const result = await fetch("https://restcountries.com/v3.1/all");
+    const result = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,capital,flags,currencies,independent,unMember,region,area,population,continents",
+    );
     const data = await result.json();
 
     const countries = data.map((country) => ({
@@ -58,7 +60,7 @@ export const CountriesProvider = ({ children }) => {
       filteredCountries = originalCountries;
     } else {
       filteredCountries = originalCountries.filter((country) =>
-        continents.includes(country.region)
+        continents.includes(country.region),
       );
     }
     const sortedCountries = applySort(filteredCountries, order);
@@ -73,15 +75,19 @@ export const CountriesProvider = ({ children }) => {
 
   const sortMembers = (member) => {
     console.log(member);
-    if (member === "independent") {
+    if (member === "") {
+      // No member filter selected -> restore full original list (respect current order)
+      const sortedCountries = applySort(originalCountries, order);
+      setCountries(sortedCountries);
+    } else if (member === "independent") {
       const filteredCountries = originalCountries.filter(
-        (country) => country.independent == true
+        (country) => country.independent == true,
       );
       const sortedCountries = applySort(filteredCountries, order);
       setCountries(sortedCountries);
     } else if (member === "memberNations") {
       const filteredCountries = originalCountries.filter(
-        (country) => country.unMember == true
+        (country) => country.unMember == true,
       );
       const sortedCountries = applySort(filteredCountries, order);
       setCountries(sortedCountries);
@@ -90,12 +96,22 @@ export const CountriesProvider = ({ children }) => {
 
   const filterByWords = (word) => {
     if (word === "") {
-      setCountries(originalCountries);
+      // Restore full list, preserving current order
+      const sortedCountries = applySort(originalCountries, order);
+      setCountries(sortedCountries);
       return;
     }
-    const filteredCountries = originalCountries.filter((country) =>
-      country.name.toLowerCase().includes(word.toLowerCase())
-    );
+    // Search only by country name and preserve current ordering
+    const filteredCountries = originalCountries
+      .filter((country) =>
+        country.name?.toLowerCase().startsWith(word.toLowerCase()),
+      )
+      .sort((a, b) => {
+        if (order === "Population") return b.population - a.population;
+        if (order === "Area") return b.area - a.area;
+        if (order === "Alphabetical") return a.name.localeCompare(b.name);
+        return 0;
+      });
     setCountries(filteredCountries);
   };
 

@@ -18,7 +18,7 @@ export default function Grid() {
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
   const currentCountries = countries.slice(
     indexOfFirstCountry,
-    indexOfLastCountry
+    indexOfLastCountry,
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -31,21 +31,33 @@ export default function Grid() {
     <div className="w-full flex items-center justify-center">
       {viewCountry === null ? (
         <div className="w-full h-screen flex flex-col items-center bg-background rounded-3xl border-[0.5px] border-[#282b30] mb-10 lg:h-[1000px] md:h-[1000px] sm:h-[1000px] max-[640px]:h-[1200px]">
-          <HeaderGrid totalCountries={countries.length} />
+          <HeaderGrid
+            totalCountries={countries.length}
+            onSearch={(q) => {
+              filterByWords(q);
+              setCurrentPage(1);
+            }}
+          />
 
           <div className="flex flex-row justify-start w-full h-[800px] max-[640px]:flex max-[640px]:flex-col max-[640px]:h-[1000px] max-[640px]:items-center">
-            <SideBarGrid />
-            <InfoGrid
-              currentCountries={currentCountries}
-              handleSelectCountry={handleSelectCountry}
-              filterByWords={filterByWords}
-            />
+            <SideBarGrid onFilterChange={() => setCurrentPage(1)} />
+            <div className="w-[100%] h-full flex flex-col items-center overflow-y-auto max-[640px]:w-full max-[640px]:h-[900px]">
+              <InfoGrid
+                currentCountries={currentCountries}
+                handleSelectCountry={handleSelectCountry}
+                filterByWords={(q) => {
+                  filterByWords(q);
+                  setCurrentPage(1);
+                }}
+              />
+              <Pagination
+                countriesPerPage={countriesPerPage}
+                totalCountries={countries.length}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </div>
           </div>
-          <Pagination
-            countriesPerPage={countriesPerPage}
-            totalCountries={countries.length}
-            paginate={paginate}
-          />
         </div>
       ) : (
         <div className="w-full h-screen flex flex-col items-center bg-background rounded-3xl border-[0.5px] border-[#282b30] mb-10 lg:w-[800px] md:w-[600px] lg:h-[1000px] md:h-[1000px] sm:h-[1000px] max-[640px]:h-[1200px]">

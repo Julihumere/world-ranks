@@ -1,7 +1,7 @@
 import React from "react";
 import { useCountries } from "../context/useContext";
 
-export default function HeaderGrid({ totalCountries }) {
+export default function HeaderGrid({ totalCountries, onSearch }) {
   const { filterByWords } = useCountries();
 
   return (
@@ -13,8 +13,10 @@ export default function HeaderGrid({ totalCountries }) {
         <input
           type="text"
           className="w-96 bg-[#282b30] px-12 py-3.5 text-textDark rounded-2xl relative font-bold placeholder:text-textDark placeholder:font-bold md:w-80 md:py-2.5 sm:w-80 sm:py-2 max-[640px]:w-[300px] max-[640px]:py-2"
-          placeholder="Search by Name, Region, Subregion"
-          onChange={(e) => filterByWords(e.target.value)}
+          placeholder="Search by Name"
+          onChange={(e) =>
+            onSearch ? onSearch(e.target.value) : filterByWords(e.target.value)
+          }
         />
         <img
           src="/assets/Search.svg"
